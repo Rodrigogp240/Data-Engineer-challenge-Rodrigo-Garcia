@@ -3,11 +3,11 @@ import json
 from typing import List, Tuple
 from datetime import datetime
 
-def get_data(file_path: str) -> List[Tuple[datetime.date, str]]:
+def get_data_Q(file_path: str) -> List[Tuple[datetime.date, str]]:
     data = []
     date_counter = Counter()
     
-    with open(file_path) as f:
+    with open(file_path, encoding='utf-8') as f:
         for line in f:
             tweet = json.loads(line)
             date = datetime.strptime(tweet['date'], '%Y-%m-%dT%H:%M:%S%z').date()
@@ -25,9 +25,10 @@ def get_data(file_path: str) -> List[Tuple[datetime.date, str]]:
     return top_10_users
 
 def q1_memory(file_path: str) -> List[Tuple[datetime.date, str]]:
-    top_10 = get_data(file_path)
-    return top_10
+    return get_data_Q(file_path)
 
-print(q1_memory(r'tweets\farmers-protest-tweets-2021-2-4.json'))
+if __name__ == '__main__':
+    file_path = '/home/rodrigo/Proyectos_python/Data-Engineer-challenge-Rodrigo-Garcia/tweets/farmers-protest-tweets-2021-2-4.json'
+    print(q1_memory(file_path))
 
 

@@ -5,7 +5,7 @@ from typing import List, Tuple
 
 def get_data(file_path: str) -> List[Tuple[datetime.date, str]]:
     data = []
-    with open(file_path) as f:
+    with open(file_path, encoding='utf-8') as f:
         for line in f:
             tweet = json.loads(line)
             date = datetime.strptime(tweet['date'], '%Y-%m-%dT%H:%M:%S%z').date()
@@ -25,8 +25,11 @@ def get_top_10_users_for_top_10_dates(data: List[Tuple[datetime.date, str]]) -> 
     
     return top_10_users
 
-def q1_memory(file_path: str) -> List[Tuple[datetime.date, str]]:
+def q1_time(file_path: str) -> List[Tuple[datetime.date, str]]:
     data = get_data(file_path)
     top_10 = get_top_10_users_for_top_10_dates(data)
     return top_10
 
+if __name__ == '__main__':
+    file_path = '/home/rodrigo/Proyectos_python/Data-Engineer-challenge-Rodrigo-Garcia/tweets/farmers-protest-tweets-2021-2-4.json'
+    q1_time(file_path)
