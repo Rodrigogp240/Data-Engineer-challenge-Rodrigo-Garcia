@@ -1,6 +1,6 @@
 .venv/
 .vscode/
 modules/__pycache__/
-tweets/*
+*.json
 *.pdf
 *.bin
