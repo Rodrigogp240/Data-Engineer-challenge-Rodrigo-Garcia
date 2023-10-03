@@ -11,7 +11,7 @@ def get_data(file_path: str) -> (List[Tuple[datetime.date, str]],Counter):
         for line in f:
             tweet = json.loads(line)
             date = datetime.strptime(tweet['date'], '%Y-%m-%dT%H:%M:%S%z').date()
-            user = tweet['user']['displayname']
+            user = tweet['user']['username']
             data.append((date, user))
             date_counter[date] += 1
     return data,date_counter
@@ -35,7 +35,7 @@ def get_top_10_users_for_top_10_dates_memory(file_path: str) -> List[Tuple[datet
         for line in file:
             record = json.loads(line)
             date = datetime.strptime(record['date'], '%Y-%m-%dT%H:%M:%S%z').date()
-            user = record['user']['displayname']
+            user = record['user']['username']
             user_counter[(date, user)] += 1
 
     return [item for item, _ in user_counter.most_common(10)]
