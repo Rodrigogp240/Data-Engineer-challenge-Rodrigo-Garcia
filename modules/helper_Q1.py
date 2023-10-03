@@ -31,7 +31,3 @@ def get_top_10_users_for_top_10_dates_memory(file_path: str) -> List[Tuple[datet
     return [item for item, _ in user_counter.most_common(10)]
 
 
-if __name__ == '__main__':
-    file_path = '/home/rodrigo/Proyectos_python/Data-Engineer-challenge-Rodrigo-Garcia/tweets/farmers-protest-tweets-2021-2-4.json'
-    get_top_10_users_for_top_10_dates_memory(file_path)
-    get_top_10_users_for_top_10_dates_time(file_path)

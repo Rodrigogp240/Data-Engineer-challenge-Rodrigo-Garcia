@@ -51,8 +51,3 @@ def count_top_emojis_memory(json_file_path):
             process_tweet(tweet_text)
 
     return emoji_counter.most_common(10)
-
-if __name__ == '__main__':
-    file_path = '/home/rodrigo/Proyectos_python/Data-Engineer-challenge-Rodrigo-Garcia/tweets/farmers-protest-tweets-2021-2-4.json'
-    count_top_emojis_memory(file_path)
-    count_top_emojis_time(file_path)
