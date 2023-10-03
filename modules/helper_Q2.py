@@ -1,17 +1,21 @@
 import multiprocessing
+from typing import List, Tuple
 from collections import Counter
 import emoji
 import json
 
 
 # Function to process a chunk of tweet texts and count emojis
-def count_emojis_chunk(chunk):
-    emoji_counter = Counter()
-    for tweet_text in chunk:
-        emoji_counter.update(emoji.distinct_emoji_list(tweet_text))
-    return emoji_counter
 
-def count_top_emojis_time(json_file_path, num_processes=4):
+
+def count_top_emojis_time(json_file_path, num_processes=4) -> List[Tuple[str, int]]:
+
+    def count_emojis_chunk(chunk:list) -> Counter:
+        emoji_counter = Counter()
+        for tweet_text in chunk:
+            emoji_counter.update(emoji.distinct_emoji_list(tweet_text))
+        return emoji_counter
+
     tweet_texts = []
     with open(json_file_path, 'r', encoding='utf-8') as file:
         for line in file:
@@ -35,10 +39,10 @@ def count_top_emojis_time(json_file_path, num_processes=4):
 
 
 
-def count_top_emojis_memory(json_file_path):    
+def count_top_emojis_memory(json_file_path) -> List[Tuple[str, int]]:    
     emoji_counter = Counter()
 
-    def process_tweet(tweet_text):
+    def process_tweet(tweet_text:str):
         tweet_emoji_counter = Counter(emoji.distinct_emoji_list(tweet_text))
         emoji_counter.update(tweet_emoji_counter)
 

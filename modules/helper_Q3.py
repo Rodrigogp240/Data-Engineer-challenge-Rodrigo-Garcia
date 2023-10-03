@@ -1,8 +1,9 @@
 from collections import Counter
+from typing import List, Tuple
 import json
 
 
-def count_top_mentions_time(json_file_path):
+def count_top_mentions_time(json_file_path:str) -> List[Tuple[str, int]]:
     mentions_list = []
     with open(json_file_path, 'r', encoding='utf-8') as file:
         for line in file:
@@ -12,7 +13,7 @@ def count_top_mentions_time(json_file_path):
     mentions_counter = Counter(mentions_list)
     return mentions_counter.most_common(10)
 
-def count_top_mentions_memory(json_file_path):
+def count_top_mentions_memory(json_file_path:str) -> List[Tuple[str, int]]:
     mentions_counter = Counter()
     with open(json_file_path, 'r', encoding='utf-8') as file:
         for line in file:
