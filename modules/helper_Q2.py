@@ -33,15 +33,13 @@ def count_top_emojis_time(json_file_path, num_processes=4):
 
     return combined_counter.most_common(10)
 
-def count_emojis(tweet_text):
-    return Counter(emoji.distinct_emoji_list(tweet_text))
 
-def count_top_emojis_memory(json_file_path):
+
+def count_top_emojis_memory(json_file_path):    
     emoji_counter = Counter()
 
     def process_tweet(tweet_text):
-        nonlocal emoji_counter
-        tweet_emoji_counter = count_emojis(tweet_text)
+        tweet_emoji_counter = Counter(emoji.distinct_emoji_list(tweet_text))
         emoji_counter.update(tweet_emoji_counter)
 
     with open(json_file_path, 'r', encoding='utf-8') as file:
@@ -51,3 +49,8 @@ def count_top_emojis_memory(json_file_path):
             process_tweet(tweet_text)
 
     return emoji_counter.most_common(10)
+
+if __name__ == '__main__':
+    file_path = '/home/rodrigo/Proyectos_python/Data-Engineer-challenge-Rodrigo-Garcia/tweets/farmers-protest-tweets-2021-2-4.json'
+    count_top_emojis_memory(file_path)
+    count_top_emojis_time(file_path)
